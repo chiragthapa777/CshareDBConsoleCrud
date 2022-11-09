@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Reflection;
-using System.Linq.Expressions;
-using System.Xml.Linq;
-using System.Net;
 
 namespace dbConsoleApp
 {
+    public class AddressBook
+    {
+        public int ID { get; set; }
+        public String Name { get; set; }
+        public String Address { get; set; }
+        public String Mobile { get; set; }
+    }
     internal class Program
     {
         public string connString = "Data Source=.;Initial Catalog=dotNetLab;User ID=sa;Password=123456";
@@ -138,11 +137,5 @@ namespace dbConsoleApp
         }
     }
 
-    public class AddressBook
-    {
-        public int ID { get; set; }
-        public String Name { get; set; }
-        public String Address { get; set; }
-        public String Mobile { get; set; }
-    }
+    
 }
