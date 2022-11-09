@@ -19,6 +19,44 @@ namespace dbConsoleApp
         {
             conn = new SqlConnection(connString);
         }
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            int go = 1;
+
+            while (go == 1)
+            {
+                int opt;
+                Console.WriteLine("1 for insert, 2 for select, 3 for update, 4 for delete");
+                opt = Int32.Parse(Console.ReadLine());
+                switch (opt)
+                {
+                    case 1:
+                        p.InsertData();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    case 2:
+                        p.DisplayData();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    case 3:
+                        p.Update();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    case 4:
+                        p.Delete();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option");
+                        break;
+                }
+            }
+        }
 
         void DisplayData()
         {
@@ -80,7 +118,7 @@ namespace dbConsoleApp
 
         void Update()
         {
-            Console.WriteLine("Enter id to delete");
+            Console.WriteLine("Enter id to update");
             int id = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Enter Name , Address & Number :");
             string name = Console.ReadLine();
@@ -97,44 +135,7 @@ namespace dbConsoleApp
             conn.Close();
             Console.WriteLine("Data with id:" + id.ToString() + " updated successfully");
         }
-        static void Main(string[] args)
-        {
-            Program p= new Program();
-            int go = 1;
 
-            while (go==1)
-            {
-                int opt;
-                Console.WriteLine("1 for insert, 2 for select, 3 for update, 4 for delete");
-                opt = Int32.Parse(Console.ReadLine());
-                switch (opt)
-                {
-                    case 1:
-                        p.InsertData();
-                        Console.WriteLine("press 1 to continue 0 to exit : ");
-                        go = Int32.Parse(Console.ReadLine());
-                        break;
-                    case 2:
-                        p.DisplayData();
-                        Console.WriteLine("press 1 to continue 0 to exit : ");
-                        go = Int32.Parse(Console.ReadLine());
-                        break;
-                    case 3:
-                        p.Update();
-                        Console.WriteLine("press 1 to continue 0 to exit : ");
-                        go = Int32.Parse(Console.ReadLine());
-                        break;
-                    case 4:
-                        p.Delete();
-                        Console.WriteLine("press 1 to continue 0 to exit : ");
-                        go = Int32.Parse(Console.ReadLine());
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option");
-                        break;
-                }
-            }
-        }
     }
 
     
