@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Xml.Linq;
+using System.Net;
 
 namespace dbConsoleApp
 {
@@ -64,9 +66,37 @@ namespace dbConsoleApp
             Console.WriteLine("Data inserted");
         }
 
-        Boolean checkID()
+        void Delete()
         {
+            Console.WriteLine("Enter id to delete");
+            int id = Int32.Parse(Console.ReadLine());
 
+            string deleteSql = "delete from AddressBook where ID="+id.ToString();
+            conn.Open();
+            SqlCommand deleteCmd = new SqlCommand(deleteSql, conn);
+            deleteCmd.ExecuteNonQuery();
+            conn.Close();
+            Console.WriteLine("Data with id:"+ id.ToString()+" deleted successfully");
+        }
+
+        void Update()
+        {
+            Console.WriteLine("Enter id to delete");
+            int id = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Name , Address & Number :");
+            string name = Console.ReadLine();
+            string address = Console.ReadLine();
+            string number = Console.ReadLine();
+            string sql = "update AddressBook set Name=@name,Address=@address,Mobile=@number where ID=@id";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand (sql, conn);    
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@number", number);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Console.WriteLine("Data with id:" + id.ToString() + " updated successfully");
         }
         static void Main(string[] args)
         {
@@ -87,6 +117,16 @@ namespace dbConsoleApp
                         break;
                     case 2:
                         p.DisplayData();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    case 3:
+                        p.Update();
+                        Console.WriteLine("press 1 to continue 0 to exit : ");
+                        go = Int32.Parse(Console.ReadLine());
+                        break;
+                    case 4:
+                        p.Delete();
                         Console.WriteLine("press 1 to continue 0 to exit : ");
                         go = Int32.Parse(Console.ReadLine());
                         break;
